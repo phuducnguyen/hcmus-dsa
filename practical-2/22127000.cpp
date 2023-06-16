@@ -283,41 +283,41 @@ int main() {
     removeBefore(flightsList, beforeFlight);
     printDoublyLinkedList(flightsList);
 
-    // // Remove a flight after the given flight
-    // Flight afterFlight{"Kenya", "Mongolia", 10, 39};
-    // cout << "Removing a flight after the given flight: ";
-    // removeAfter(flightsList, afterFlight);
-    // printDoublyLinkedList(flightsList);
+    // Remove a flight after the given flight
+    Flight afterFlight{"Kenya", "Mongolia", 10, 39};
+    cout << "Removing a flight after the given flight: ";
+    removeAfter(flightsList, afterFlight);
+    printDoublyLinkedList(flightsList);
 
-    // // Add a new flight after the given flight
-    // Flight addAfterFlight{"Kenya", "Mongolia", 10, 39};
-    // Flight newFlight{"Kenya", "Mongolia", 11, 0};
-    // cout << "Adding a new flight after the given flight: ";
-    // bool success = addAfter(flightsList, addAfterFlight, newFlight);
-    // if (success)
-    //     printDoublyLinkedList(flightsList);
-    // else
-    //     cout << "Failed to add a new flight." << endl;
+    // Add a new flight after the given flight
+    Flight addAfterFlight{"Kenya", "Mongolia", 10, 39};
+    Flight newFlight{"Saigon", "Hanoi", 8, 45};
+    cout << "Adding a new flight after the given flight: ";
+    bool success = addAfter(flightsList, addAfterFlight, newFlight);
+    if (success)
+        printDoublyLinkedList(flightsList);
+    else
+        cout << "Failed to add a new flight." << endl;
 
     // Add a new flight before the given flight
-    // Flight addBeforeFlight{"Kenya", "Mongolia", 10, 39};
-    // Flight newFlight2{"Kenya", "Mongolia", 10, 0};
-    // cout << "Adding a new flight before the given flight: ";
-    // bool success = addBefore(flightsList, addBeforeFlight, newFlight2);
-    // if (success)
-    //     printDoublyLinkedList(flightsList);
-    // else
-    //     cout << "Failed to add a new flight." << endl;
+    Flight addBeforeFlight{"Kenya", "Mongolia", 10, 39};
+    Flight newFlight2{"Hanoi", "Danang", 4, 57};
+    cout << "Adding a new flight before the given flight: ";
+    success = addBefore(flightsList, addBeforeFlight, newFlight2);
+    if (success)
+        printDoublyLinkedList(flightsList);
+    else
+        cout << "Failed to add a new flight." << endl;
 
-    // // Add a new flight at a specific position
-    // Flight addAtPosFlight{"Kenya", "Mongolia", 10, 39};
-    // int position = 2;
-    // cout << "Adding a new flight at position " << position << ": ";
-    // success = addAtPosition(flightsList, addAtPosFlight, position);
-    // if (success)
-    //     printDoublyLinkedList(flightsList);
-    // else
-    //     cout << "Failed to add a new flight." << endl;
+    // Add a new flight at a specific position after the given position
+    Flight addAtPosFlight{"HCMC", "Paris", 18, 50};
+    int position = 12940;   // line 12940 in datafile
+    cout << "Adding a new flight at position " << position << ": ";
+    success = addAtPosition(flightsList, addAtPosFlight, position);
+    if (success)
+        printDoublyLinkedList(flightsList);
+    else
+        cout << "Failed to add a new flight." << endl;
 
     return 0;
 }
