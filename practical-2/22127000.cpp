@@ -252,14 +252,13 @@ Flight extractFlight(string line) {
 
     getline(s, buf, '\"');
     getline(s, buf, ',');
-    
+
     // Notice: Have bug what: stoi() here, when using stoi() function from <string> library
     // So i use atoi instead of...
     f.hour = atoi(buf.c_str());
 
     getline(s, buf, '\"');
     f.minute = atoi(buf.c_str());
-    // cout << f.minute << endl;
 
     return f;
 }
@@ -278,21 +277,21 @@ int main() {
         inputFile.close();
     }
 
-    // // Remove a flight before the given flight
-    // Flight beforeFlight{"SGN", "DAD", 10, 30};
-    // cout << "Removing a flight before the given flight: ";
-    // removeBefore(flightsList, beforeFlight);
+    // Remove a flight before the given flight
+    Flight beforeFlight{"Kenya", "Mongolia", 10, 39};
+    cout << "Removing a flight before the given flight: ";
+    removeBefore(flightsList, beforeFlight);
     printDoublyLinkedList(flightsList);
 
     // // Remove a flight after the given flight
-    // Flight afterFlight{"SGN", "HAN", 8, 45};
+    // Flight afterFlight{"Kenya", "Mongolia", 10, 39};
     // cout << "Removing a flight after the given flight: ";
     // removeAfter(flightsList, afterFlight);
     // printDoublyLinkedList(flightsList);
 
     // // Add a new flight after the given flight
-    // Flight addAfterFlight{"SGN", "HAN", 9, 0};
-    // Flight newFlight{"SGN", "DAD", 11, 0};
+    // Flight addAfterFlight{"Kenya", "Mongolia", 10, 39};
+    // Flight newFlight{"Kenya", "Mongolia", 11, 0};
     // cout << "Adding a new flight after the given flight: ";
     // bool success = addAfter(flightsList, addAfterFlight, newFlight);
     // if (success)
@@ -300,18 +299,18 @@ int main() {
     // else
     //     cout << "Failed to add a new flight." << endl;
 
-    // // Add a new flight before the given flight
-    // Flight addBeforeFlight{"SGN", "DAD", 12, 0};
-    // Flight newFlight2{"SGN", "HAN", 10, 0};
+    // Add a new flight before the given flight
+    // Flight addBeforeFlight{"Kenya", "Mongolia", 10, 39};
+    // Flight newFlight2{"Kenya", "Mongolia", 10, 0};
     // cout << "Adding a new flight before the given flight: ";
-    // success = addBefore(flightsList, addBeforeFlight, newFlight2);
+    // bool success = addBefore(flightsList, addBeforeFlight, newFlight2);
     // if (success)
     //     printDoublyLinkedList(flightsList);
     // else
     //     cout << "Failed to add a new flight." << endl;
 
     // // Add a new flight at a specific position
-    // Flight addAtPosFlight{"SGN", "HAN", 11, 30};
+    // Flight addAtPosFlight{"Kenya", "Mongolia", 10, 39};
     // int position = 2;
     // cout << "Adding a new flight at position " << position << ": ";
     // success = addAtPosition(flightsList, addAtPosFlight, position);
