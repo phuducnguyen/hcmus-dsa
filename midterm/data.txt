@@ -1,0 +1,12 @@
+3 6
+a b d d e f
+f e c c b a
+a b d d e f
+2 3
+
+0.1.10.12345
+
+Vietnam,Asia
+Congo,Africa
+Falkland Islands,America
+Anguilla,America
