@@ -1,81 +1,79 @@
 ﻿#include <iostream>
 #include <fstream>
-#include <cmath>
-#include <time.h>
+#include <vector>
+#include <random>
+#include <algorithm>
+#include <chrono>
+
 using namespace std;
 
 template <class T>
-void HoanVi(T &a, T &b)
-{
-	T x = a;
+void Swap(T& a, T& b) {
+	T temp = a;
 	a = b;
-	b = x;
+	b = temp;
 }
 
 //-------------------------------------------------
-
 // Hàm phát sinh mảng dữ liệu ngẫu nhiên
-void GenerateRandomData(int a[], int n)
-{
-	srand((unsigned int)time(NULL));
+void GenerateRandomData(vector<int>& data, int n) {
+	std::random_device rd;
+  std::mt19937 generator(rd());
+  std::uniform_int_distribution<int> distribution(0, n-1);
 
-	for (int i = 0; i < n; i++)
-	{
-		a[i] = rand()%n;
-	}
+  data.clear();
+  for (int i = 0; i < n; i++) {
+      data.push_back(distribution(generator));
+  }
 }
 
 // Hàm phát sinh mảng dữ liệu có thứ tự tăng dần
-void GenerateSortedData(int a[], int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		a[i] = i;
+void GenerateSortedData(vector<int>& data, int n) {
+	data.clear();
+	for (int i = 0; i < n; i++)	{
+		data.push_back(i);
 	}
 }
 
 // Hàm phát sinh mảng dữ liệu có thứ tự ngược (giảm dần)
-void GenerateReverseData(int a[], int n)
+void GenerateReverseData(vector<int>& data, int n)
 {
-	for (int i = 0; i < n; i++)
-	{
-		a[i] = n - 1 - i;
+	data.clear();
+	for (int i = n - 1; i >= 0; i--) {
+		data.push_back(i);
 	}
 }
 
 // Hàm phát sinh mảng dữ liệu gần như có thứ tự
-void GenerateNearlySortedData(int a[], int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		a[i] = i;
-	}
-	srand((unsigned int) time(NULL));
-	for (int i = 0; i < 10; i ++)
-	{
-		int r1 = rand()%n;
-		int r2 = rand()%n;
-		HoanVi(a[r1], a[r2]);
-	}
+void GenerateNearlySortedData(vector<int>& data, int n) {
+	GenerateSortedData(data, n);
+	std::random_device rd;
+  std::mt19937 generator(rd());
+  std::uniform_int_distribution<int> distribution(0, n-1);
+
+  for (int i = 0; i < 10; i++)
+  {
+    int r1 = distribution(generator);
+    int r2 = distribution(generator);
+    Swap(data[r1], data[r2]);
+  }
 }
 
-void GenerateData(int a[], int n, int dataType)
-{
-	switch (dataType)
-	{
+void GenerateData(vector<int>& data, int n, int dataType) {
+	switch (dataType)	{
 	case 0:	// ngẫu nhiên
-		GenerateRandomData(a, n);
+		GenerateRandomData(data, n);
 		break;
 	case 1:	// có thứ tự
-		GenerateSortedData(a, n);
+		GenerateSortedData(data, n);
 		break;
 	case 2:	// có thứ tự ngược
-		GenerateReverseData(a, n);
+		GenerateReverseData(data, n);
 		break;
 	case 3:	// gần như có thứ tự
-		GenerateNearlySortedData(a, n);
+		GenerateNearlySortedData(data, n);
 		break;
 	default:
-		printf("Error: unknown data type!\n");
+		cout << "Error: Unknown data type!" << endl;
 	}
 }
