@@ -1,79 +1,69 @@
-﻿#include <iostream>
-#include <fstream>
-#include <vector>
-#include <random>
-#include <algorithm>
-#include <chrono>
+﻿#include "data_generator.h"
+#include <algorithm>	// for std::swap
+#include <random>			// for std::mt19937
 
-using namespace std;
-
-template <class T>
-void Swap(T& a, T& b) {
-	T temp = a;
-	a = b;
-	b = temp;
-}
-
-//-------------------------------------------------
-// Hàm phát sinh mảng dữ liệu ngẫu nhiên
-void GenerateRandomData(vector<int>& data, int n) {
+// Generates a random sequence of integers
+void GenerateRandomData(std::vector<int>& data, int size) {
 	std::random_device rd;
   std::mt19937 generator(rd());
-  std::uniform_int_distribution<int> distribution(0, n-1);
+  std::uniform_int_distribution<int> distribution(0, size - 1);
 
   data.clear();
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < size; i++) {
       data.push_back(distribution(generator));
   }
 }
 
-// Hàm phát sinh mảng dữ liệu có thứ tự tăng dần
-void GenerateSortedData(vector<int>& data, int n) {
+// Generates data in ascending order
+void GenerateSortedData(std::vector<int>& data, int size) {
 	data.clear();
-	for (int i = 0; i < n; i++)	{
+	
+	for (int i = 0; i < size; i++)	{
 		data.push_back(i);
 	}
 }
 
-// Hàm phát sinh mảng dữ liệu có thứ tự ngược (giảm dần)
-void GenerateReverseData(vector<int>& data, int n)
+// Generates data in descending order
+void GenerateReverseSortedData(std::vector<int>& data, int size)
 {
 	data.clear();
-	for (int i = n - 1; i >= 0; i--) {
+
+	for (int i = size - 1; i >= 0; i--) {
 		data.push_back(i);
 	}
 }
 
-// Hàm phát sinh mảng dữ liệu gần như có thứ tự
-void GenerateNearlySortedData(vector<int>& data, int n) {
-	GenerateSortedData(data, n);
+// Generates nearly sorted data where only a few elements are out of order
+void GenerateNearlySortedData(std::vector<int>& data, int size) {
+	GenerateSortedData(data, size);
+	
 	std::random_device rd;
   std::mt19937 generator(rd());
-  std::uniform_int_distribution<int> distribution(0, n-1);
+  std::uniform_int_distribution<int> distribution(0, size - 1);
 
-  for (int i = 0; i < 10; i++)
-  {
+  for (int i = 0; i < 10; i++) {
     int r1 = distribution(generator);
     int r2 = distribution(generator);
-    Swap(data[r1], data[r2]);
+    std::swap(data[r1], data[r2]);
   }
 }
 
-void GenerateData(vector<int>& data, int n, int dataType) {
-	switch (dataType)	{
-	case 0:	// ngẫu nhiên
-		GenerateRandomData(data, n);
-		break;
-	case 1:	// có thứ tự
-		GenerateSortedData(data, n);
-		break;
-	case 2:	// có thứ tự ngược
-		GenerateReverseData(data, n);
-		break;
-	case 3:	// gần như có thứ tự
-		GenerateNearlySortedData(data, n);
-		break;
-	default:
-		cout << "Error: Unknown data type!" << endl;
+void GenerateData(std::vector<int>& data, int size, DataOrder order) {
+	switch (order) {
+		case DataOrder::Random:
+			GenerateRandomData(data, size);
+			break;
+		case DataOrder::Sorted:
+			GenerateSortedData(data, size);
+			break;
+		case DataOrder::ReverseSorted:
+			GenerateReverseSortedData(data, size);
+			break;
+		case DataOrder::NearlySorted:
+			GenerateNearlySortedData(data, size);
+			break;
+		default:
+			printf("Error: unknown data type!\n");
+			// throw std::runtime_error("Unknown data order!");
 	}
 }
