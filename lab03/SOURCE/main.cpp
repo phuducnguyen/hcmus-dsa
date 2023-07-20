@@ -1,19 +1,11 @@
-#include "DataGenerator.cpp"
+#include "data_generator.h"
+#include "file_io.h"
+#include "sorting_algorithms.h"
+
+using namespace std;
 
 int main() {
-	const int dataSize = 100;
-	vector<int> data;
-
-	// Generate random data
-	GenerateData(data, dataSize, 3);
-
-	// Print the generated data
-	cout << "Generated data: ";
-	for (int i = 0; i < dataSize; ++i) {
-		cout << data[i] << " ";
-	}
-
-	cout << endl;
-
-	return 0;
+	// Perform input arguments
+	// Then display result in console & file 
+	cout << "Happy Coding!" << endl;
 }

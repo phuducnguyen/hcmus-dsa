@@ -88,6 +88,9 @@ void HeapSort(std::vector<int>& data) {
 }
 
 
-// void MergeSort(std::vector<int>& data);
+void MergeSort(std::vector<int>& data) {
+	int divide = 0;
+	for (int i = 0; i < 
+}
 // void QuickSort(std::vector<int>& data);
 // void RadixSort(std::vector<int>& data);
