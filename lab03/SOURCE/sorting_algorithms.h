@@ -10,5 +10,8 @@ void HeapSort(std::vector<int>& data);
 void MergeSort(std::vector<int>& data);
 void QuickSort(std::vector<int>& data);
 void RadixSort(std::vector<int>& data);
+void ShakerSort(std::vector<int>& data);
+void ShellSort(std::vector<int>& data);
+void FlashSort(std::vector<int>& data);
 
 #endif // SORTING_ALGORITHMS_H

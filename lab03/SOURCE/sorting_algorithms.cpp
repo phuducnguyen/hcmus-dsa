@@ -220,3 +220,135 @@ void RadixSort(std::vector<int>& data) {
         CountSort(data, exp);
     }
 }
+
+
+// Shaker Sort
+void ShakerSort(std::vector<int>& data) {
+	int left = 0;
+	int right = data.size() - 1;
+	bool swapped;
+
+	do {
+		swapped = false;
+
+		// Move from left to right
+		for (int i = left; i < right; i++) {
+			if (data[i] > data[i + 1]) {
+				Swap(data[i], data[i + 1]);
+				swapped = true;
+			}
+ 		}
+
+ 		right--;
+
+ 		// The list is already sorted
+ 		if (!swapped) {
+ 			break;	
+ 		}
+
+ 		// Move from right to left
+ 		for (int i = right; i > left; ++i) {
+ 			if (data[i] < data[i - 1]) {
+ 				Swap(data[i], data[i - 1]);
+ 				swapped = true;
+ 			}
+ 		}
+
+ 		left++;
+	} while (swapped);
+}
+
+// Shell Sort
+#include <vector>
+
+void ShellSort(std::vector<int>& data) {
+    int n = data.size();
+    int gap = n / 2;
+
+    while (gap > 0) {
+        for (int i = gap; i < n; i++) {
+            int temp = data[i];
+            int j = i;
+
+            while (j >= gap && data[j - gap] > temp) {
+                data[j] = data[j - gap];
+                j -= gap;
+            }
+
+            data[j] = temp;
+        }
+
+        gap /= 2;
+    }
+}
+
+void FlashSort(std::vector<int>& data) {
+    int n = data.size();
+    if (n == 0) return;
+
+    int m = static_cast<int>(0.45 * n);
+    std::vector<int> temp(m, 0);
+
+    int maxVal = data[0];
+    int minVal = data[0];
+    int maxIndex = 0;
+
+    for (int i = 1; i < n; i++) {
+        if (data[i] > maxVal) {
+            maxVal = data[i];
+            maxIndex = i;
+        } else if (data[i] < minVal) {
+            minVal = data[i];
+        }
+    }
+
+    if (maxVal == minVal) return; // All elements are the same
+
+    double c = static_cast<double>(m - 1) / (maxVal - minVal);
+
+    for (int i = 0; i < n; i++) {
+        int k = static_cast<int>(c * (data[i] - minVal));
+        temp[k]++;
+    }
+
+    for (int i = 1; i < m; i++) {
+        temp[i] += temp[i - 1];
+    }
+
+    int hold = data[maxIndex];
+    data[maxIndex] = data[0];
+    data[0] = hold;
+
+    int moveIndex = 0;
+    int j = 0;
+    int k = m - 1;
+
+    while (moveIndex < n - 1) {
+        while (j > temp[k] - 1) {
+            j++;
+            k = static_cast<int>(c * (data[j] - minVal));
+        }
+
+        if (k < 0) break;
+
+        int flash = data[j];
+
+        while (j != temp[k]) {
+            k = static_cast<int>(c * (flash - minVal));
+            int hold = data[temp[k] - 1];
+            data[--temp[k]] = flash;
+            flash = hold;
+            moveIndex++;
+        }
+    }
+
+    for (int i = 1; i < n; i++) {
+        int key = data[i];
+        int j = i - 1;
+        while (j >= 0 && data[j] > key) {
+            data[j + 1] = data[j];
+            j--;
+        }
+        data[j + 1] = key;
+    }
+}
