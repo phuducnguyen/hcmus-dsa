@@ -1,4 +1,4 @@
-#include "sorting_algorithms.h"
+#include "SortingAlgorithms.h"
 
 // Helper function to swap two elements
 void Swap(int& a, int& b) {
@@ -239,7 +239,8 @@ void ShakerSort(std::vector<int>& data) {
 			}
  		}
 
- 		right--;
+ 		//
+  		right--;
 
  		// The list is already sorted
  		if (!swapped) {
@@ -282,6 +283,7 @@ void ShellSort(std::vector<int>& data) {
     }
 }
 
+// Flash Sort
 void FlashSort(std::vector<int>& data) {
     int n = data.size();
     if (n == 0) return;
