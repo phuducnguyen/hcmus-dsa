@@ -4,9 +4,9 @@
 
 template <class T>
 void Swap(T &a, T &b) {
-	T temp = a;
+	T tmp = a;
 	a = b;
-	b = temp;
+	b = tmp;
 }
 
 /* We was modified to Dynamic Arrays */
