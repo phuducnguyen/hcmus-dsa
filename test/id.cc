@@ -35,13 +35,13 @@ Player readPlayer(const string& line) {
   getline(ss, player.name, ',');
   getline(ss, player.dob, ',');
   string token;
-  ss >> player.height;
-  ss.ignore();  // Ignore the comma
-  ss >> player.weight;
-  // getline(ss, token, ',');
-  // player.height = atoi(token.c_str());
-  // getline(ss, token, ',');
-  // player.weight = atoi(token.c_str());
+//  ss >> player.height;
+//  ss.ignore();  // Ignore the comma
+//  ss >> player.weight;
+  getline(ss, token, ',');
+  player.height = atoi(token.c_str());
+  getline(ss, token, ',');
+  player.weight = atoi(token.c_str());
   getline(ss, player.nationality, ',');
   getline(ss, player.club, ',');
 
@@ -61,10 +61,11 @@ void insert(TreeNode*& root, const Player& player) {
   }
 }
 
+// In-order traversal
 void inOrderTraversal(TreeNode* root) {
   if (root != nullptr) {
     inOrderTraversal(root->left);
-    cout << root->player.name << " ";
+    cout << "\nClub now: " << root->player.club << "\t Name: " << root->player.name << " ";
     inOrderTraversal(root->right);
   }
 }
